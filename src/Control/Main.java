@@ -1,8 +1,15 @@
 package Control;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("hello");
-        System.out.println("aaa");
+        boolean InMainMenu = true;
+        while (InMainMenu) {
+            Scanner scanner = new Scanner(System.in);
+            String command = scanner.nextLine();
+            command = command.trim();
+            Account.handleEvent(command);
+        }
     }
 }
