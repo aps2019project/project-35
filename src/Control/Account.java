@@ -2,8 +2,8 @@ package Control;
 
 import Control.Match.Match;
 import Model.Card;
+import Model.Hero;
 import Model.Item;
-import Model.Soldier.Hero;
 import View.View;
 
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ public class Account {
     private static ArrayList<Account> accounts = new ArrayList<>();
     private static int indexOfLogined =  -1;
     private static int idSetter = 0;
+    private int id;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
@@ -60,10 +61,16 @@ public class Account {
         }
     }
     public static void handleLogin(String command){
-        if (command.equals("logout")){
+        if (command.equals("logout") || command.equals("exit")){
             indexOfLogined = -1;
             return;
         }
+        else if (command.equals("Enter shop")){
+            handleShop(command);
+        }
+    }
+    public static void handleShop(String command){
+
     }
     private static void createAccount(String command, Scanner scanner){
         if (command.trim().equals("create account")){
@@ -127,4 +134,6 @@ public class Account {
     public int getWins(){
         return wins;
     }
+    public int getId() {return id;}
+    public ArrayList<Card> getGraveYard(){ return graveYard;}
 }

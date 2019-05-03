@@ -5,12 +5,15 @@ import Model.Spell;
 
 import java.util.ArrayList;
 
-public class Match {
+public abstract class Match {
     private Account firstAccount;
     private Account secondAccount;
     private int turn = 0;
     private Square[][] squares = new Square[5][9];
     ArrayList<Spell> activeSpells;
+    public Match(){
+
+    }
     public Match(Account firstAccount, Account secondAccount){
         this.firstAccount = firstAccount;
         this.secondAccount = secondAccount;
@@ -27,4 +30,5 @@ public class Match {
         }
         return firstAccount;
     }
+    public Square[][] getSquares(){return squares;}
 }
