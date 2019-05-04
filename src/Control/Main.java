@@ -8,16 +8,14 @@ import Control.Match.Mode3;
 import java.util.Scanner;
 
 public class Main {
+    public static int menu = 0;
     public static void main(String[] args) {
         Mode1 mode1;
         Mode2 moode2;
         Mode3 mode3;
-        boolean inMainMenu = true;
-        boolean inBattle = false;
-        boolean inShop = false;
         Scanner scanner = new Scanner(System.in);
         String command = null;
-
+        Menu.handleMenu(command, scanner);
 //        while (inMainMenu) {
 //            System.out.println(Account.getIndexOfLogined());
 //            if (Account.getIndexOfLogined() != -1){

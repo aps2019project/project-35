@@ -15,7 +15,11 @@ public abstract class Soldier extends Card {
     protected int ap;
     protected int moves;
     protected final String attackType;
+    private String specialPower;
     private boolean activeSpecialPower;
+    public String getSpecialPower(){
+        return specialPower;
+    }
     protected void checkDeath(){
         if (hp <= 0){
             this.getAccount().getGraveYard().add(this);
@@ -29,5 +33,17 @@ public abstract class Soldier extends Card {
     }
     public void setActiveCounterAttack(boolean bool){
         activeCounterAttack = bool;
+    }
+    public int getAp(){
+        return ap;
+    }
+    public int getHp(){
+        return hp;
+    }
+    public int getMoves(){
+        return  moves;
+    }
+    public String getAttackType(){
+        return attackType;
     }
 }

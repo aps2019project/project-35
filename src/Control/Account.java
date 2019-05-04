@@ -4,6 +4,7 @@ import Control.Match.Match;
 import Model.Card;
 import Model.Hero;
 import Model.Item;
+import Model.Minion;
 import View.View;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Account {
     private ArrayList<Hero> heroes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Minion> minions = new ArrayList<>();
     private ArrayList<Card> graveYard = new ArrayList<>();
     private ArrayList<MatchHistory> matchHistories = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
@@ -31,33 +33,26 @@ public class Account {
     private String password;
     private String username;
 
-    private Account(String username, String password) {
+    private Account(String username, String password, int idSetter) {
         daric = 15000;
         wins = 0;
         cardIdCounter = 0;
         itemIdCounter = 0;
         this.username = username;
         this.password = password;
+        id = idSetter;
     }
-
-    public static boolean handleEvent(String command, Scanner scanner) {
-        String[] splitedCommand = command.split(" ");
-        if (command.matches("create account.*")) {
-            createAccount(command, scanner);
-        } else if (command.matches("login.*")) {
-            loginAccount(command, scanner, false);
-        } else if (command.equals("show leaderboard")) {
-            View.showLeaderboard();
-        } else if (command.equals("help")) {
-            System.out.println("create account [username] : makes an account");
-            System.out.println("login [username] : logins your account");
-            System.out.println("show leaderboard : shows the account by the number of wins");
-            System.out.println("save : saves your info");
-            System.out.println("logout : logout your account");
-        } else if (command.equals("exit")) {
-            return true;
-        }
-        return false;
+    public ArrayList<Hero> getHeroes(){
+        return heroes;
+    }
+    public ArrayList<Item> getItems(){
+        return  items;
+    }
+    public  ArrayList<Minion> getMinions(){
+        return minions;
+    }
+    public ArrayList<Card> getCards(){
+        return cards;
     }
 
     //this function returns 1 for entering battle,
@@ -76,11 +71,7 @@ public class Account {
         return 0;
     }
 
-    public static void handleShop(String command) {
-
-    }
-
-    private static void createAccount(String command, Scanner scanner) {
+    public static void createAccount(String command, Scanner scanner) {
         if (command.trim().equals("create account")) {
             System.out.println("Error : please select a username for your account !");
             return;
@@ -98,7 +89,7 @@ public class Account {
             System.out.println("Error : you have to enter a password for your account");
             return;
         }
-        Account account = new Account(command.substring(15), password);
+        Account account = new Account(command.substring(15), password, idSetter);
         accounts.add(account);
         System.out.println("Account created successfully");
 //        System.out.println(accounts.get(idSetter).username + " " + accounts.get(idSetter).password);
@@ -130,6 +121,7 @@ public class Account {
             System.out.println("Error : username not found !");
         }
         System.out.println("Login successful");
+        Menu.increaseMenu();
         return true;
     }
 

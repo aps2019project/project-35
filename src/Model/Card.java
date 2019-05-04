@@ -20,4 +20,13 @@ public abstract class Card {
     public Account getAccount(){
         return account;
     }
+    public String getName(){
+        return name;
+    }
+    public  int getPrice(){
+        return  price;
+    }
+    public  int getMp(){
+        return mp;
+    }
 }
