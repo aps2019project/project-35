@@ -27,4 +27,7 @@ public abstract class Soldier extends Card {
     protected void decreaseHP(int ap) {
         this.hp -= ap;
     }
+    public void setActiveCounterAttack(boolean bool){
+        activeCounterAttack = bool;
+    }
 }
