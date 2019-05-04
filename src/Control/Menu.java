@@ -30,9 +30,14 @@ public class Menu {
             }
         }
         while (menu ==  1){
+            int accountMenu = 0;
             command = scanner.nextLine();
             command =  command.toLowerCase();
             if (command.equals("enter collection")){
+                accountMenu = 1;
+            }
+            while (accountMenu == 1){
+
             }
         }
     }
