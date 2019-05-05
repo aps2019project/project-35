@@ -1,5 +1,7 @@
 package Control;
 
+import Model.Card;
+import Model.Item;
 import View.View;
 
 import java.util.Scanner;
@@ -37,6 +39,84 @@ public class Menu {
                 accountMenu = 1;
             }
             while (accountMenu == 1){
+                    command = scanner.nextLine();
+                    command = command.toLowerCase();
+                    if (command.equals("exit")){
+                        accountMenu = 0;
+                    }
+                    else if (command.equals("show")){
+                        View.showCollection();
+                    }
+                    else if (command.matches("search [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+//                        for(int i=1;i<Account.getItems.size();i++){
+//                            if(commands[1].equals(Collection.collectionCards.get(i))){
+//                                System.out.println(Collection.collectionCards.get(i).getIdNumber());
+//                            }
+//
+//                        }
+                        Item[] items = Account.getItems();
+                        Card[] cards = Account.getCards();
+                        for (Item item:items
+                             ) {
+                            if(commands[1].equals(item.getName())){
+                                System.out.println(item.getID());
+                            }
+                        }
+                        for (Card card:cards
+                             ) {
+                            if(commands[1].equals(card.getName())){
+                                System.out.println(card.getIdNumber());
+                            }
+                        }
+                    }
+                    else if (command.equals("save")){}
+                    else if (command.matches("create deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.matches("delete deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+                        for (Deck deck: Account.getDecks();
+                             ) {
+                            
+                        }
+
+                    }
+                    else if (command.matches("add [a-zA-Z]+ to deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.matches("remove [a-zA-Z]+ from deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.matches("validate deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.matches("select deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.equals("show all decks")){}
+                    else if (command.matches("show deck [a-zA-Z]+")){
+                        String[] commands = command.split(" ");
+
+                    }
+                    else if (command.equals("help")){
+                        System.out.println("exit, show, search, create deck, delete deck, add to deck, remove from deck, validate deck, select deck, show all decks, show deck");
+                    }
+                    else {}
+
+
+
+
+
+
+
+
+
 
             }
         }

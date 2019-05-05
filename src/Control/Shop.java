@@ -1,6 +1,5 @@
 package Control;
 
-import Control.Item.Item;
 import Model.Hero;
 import Model.Minion;
 

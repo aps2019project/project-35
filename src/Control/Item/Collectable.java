@@ -1,4 +1,4 @@
 package Control.Item;
 
-public class Collectable extends Item {
+public class Collectable {
 }

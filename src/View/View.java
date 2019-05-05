@@ -5,7 +5,8 @@ import Model.*;
 
 import java.util.ArrayList;
 
-public class View {
+public class
+View {
     public static void showLeaderboard() {
         ArrayList<String> usernames = new ArrayList<>();
         ArrayList<Integer> wins = new ArrayList<>();

@@ -1,4 +1,4 @@
 package Control.Item;
 
-public class Flag extends Item {
+public class Flag {
 }

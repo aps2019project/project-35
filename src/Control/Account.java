@@ -23,7 +23,7 @@ public class Account {
     private ArrayList<Minion> minions = new ArrayList<>();
     private ArrayList<Card> graveYard = new ArrayList<>();
     private ArrayList<MatchHistory> matchHistories = new ArrayList<>();
-    private ArrayList<Deck> decks = new ArrayList<>();
+    private ArrayList<Deck> decks = new ArrayList<Deck>();
     private int daric;
     private int mana;
     private int maxMana;
@@ -48,12 +48,13 @@ public class Account {
     public ArrayList<Item> getItems(){
         return  items;
     }
-    public  ArrayList<Minion> getMinions(){
+    public ArrayList<Minion> getMinions(){
         return minions;
     }
     public ArrayList<Card> getCards(){
         return cards;
     }
+    public ArrayList<Deck> getDecks(){ return decks}
 
     //this function returns 1 for entering battle,
     //2 for entering shop
@@ -168,4 +169,5 @@ public class Account {
     public static boolean getLeogined() {
         return logined;
     }
+
 }
