@@ -7,6 +7,7 @@ import Model.Item;
 import Model.Minion;
 import View.View;
 
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +55,7 @@ public class Account {
     public ArrayList<Card> getCards(){
         return cards;
     }
-    public ArrayList<Deck> getDecks(){ return decks}
+    public ArrayList<Deck> getDecks(){ return decks;}
 
     //this function returns 1 for entering battle,
     //2 for entering shop
@@ -125,7 +126,43 @@ public class Account {
         Menu.increaseMenu();
         return true;
     }
-
+    public static void searchCollection(String command){
+        boolean exists = false;
+        command = command.substring(18);
+        Account account = Account.getAccounts().get(Account.getIndexOfLogined());
+        for (int i = 0; i < account.getCards().size(); i++) {
+            Card card = account.getCards().get(i);
+            if (card.getName().equals(command)){
+                System.out.println(card.getIdNumber());
+                exists = true;
+            }
+        }
+        for (int i = 0; i < account.getItems().size(); i++) {
+            Item item = account.getItems().get(i);
+            if (item.getName().equals(command)){
+                System.out.println(item.getID());
+                exists = true;
+            }
+        }
+        if (!exists)
+            System.out.println("there isn't any card with this name in your collection");
+    }
+    public static boolean searchCollectionById(int id){
+        Account account  = Account.getAccounts().get(Account.getIndexOfLogined());
+        for (int i = 0; i < account.getCards().size(); i++) {
+            Card card  = account.getCards().get(i);
+            if (card.getIdNumber() == id){
+                return true;
+            }
+        }
+        for (int i = 0; i < account.getItems().size(); i++) {
+            Item item =  account.getItems().get(i);
+            if (item.getID() == id){
+                return true
+            }
+        }
+        return  false;
+    }
     public static int getNumberOfAccounts() {
         return accounts.size();
     }
@@ -168,6 +205,12 @@ public class Account {
 
     public static boolean getLeogined() {
         return logined;
+    }
+    public int getDaric(){
+        return daric;
+    }
+    public void setDaric(int daric){
+        this.daric = daric;
     }
 
 }

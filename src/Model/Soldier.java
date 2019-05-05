@@ -1,8 +1,8 @@
 package Model;
 
 public abstract class Soldier extends Card {
-    public Soldier(int hp, int ap, int mp, int price, String name, String attackType, int attackRange){
-        super(mp, price, name, attackRange);
+    public Soldier(int hp, int ap, int mp, int price, String name, String attackType, int attackRange, int idNumber){
+        super(mp, price, name, attackRange, idNumber);
         this.ap = ap;
         this.hp = hp;
         this.attackType = attackType;
