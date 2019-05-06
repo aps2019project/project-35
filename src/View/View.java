@@ -1,12 +1,12 @@
 package View;
 
 import Control.Account;
+import Control.Deck;
 import Model.*;
 
 import java.util.ArrayList;
 
-public class
-View {
+public class View {
     public static void showLeaderboard() {
         ArrayList<String> usernames = new ArrayList<>();
         ArrayList<Integer> wins = new ArrayList<>();
@@ -61,5 +61,48 @@ View {
                         " - Sell cost : " + card.getPrice());
             }
         }
+    }
+    public static void showDeck(Deck deck){
+        System.out.println("Heroes :");
+        System.out.println("\t 1 : Name : " + deck.getHero().getName() + " - AP : "
+         + deck.getHero().getAp() + " - HP : "+ deck.getHero().getHp() + " - class : "
+         + deck.getHero().getClass() + " - special power : " + deck.getHero().getSpecialPower() +
+         " - sell cost : " + deck.getHero().getPrice());
+        System.out.println("Items :");
+        if(deck.getItem() == null){
+            System.out.println("\tno item");
+        }
+        else{
+            System.out.println("\t 1 : Name : " + deck.getItem().getName() + " - Desc : " +
+            deck.getItem().getDesc() + " - Spell Cost : " + deck.getItem().getPrice());
+        }
+        System.out.println("Cards :");
+        int i = 1;
+        for (Card card:deck.getCards()
+             ) {
+            //System.out.println("\t" + i + " : Type : " + card.getClass().getName() + " - Name : " + card.get                           );
+
+
+            if (card instanceof Spell) {
+                System.out.println("\t" + i + " : Type : Spell - Name : " + card.getName() + "MP : "
+                        + card.getMp() + "Descrption : " + ((Spell) card).getDescription() +
+                        " - Sell cost : " + card.getPrice());
+            }
+            else {
+                System.out.println("\t" + i + " : Type : Minion - Name : "  + card.getName() +
+                        " - Class : " + ((Minion) card).getAttackType() + " - AP : " +
+                        ((Minion) card).getAp() + " - HP : " + ((Minion) card).getHp() +
+                        " - MP  : " + card.getMp() + " Special Power : " + ((Minion) card).getSpecialPower()
+                        + " - Sell cost : " + card.getPrice());
+            }
+        }
+    }
+
+
+
+
+
+    public static void classToString(Card card){
+
     }
 }

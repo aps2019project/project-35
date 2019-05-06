@@ -17,6 +17,7 @@ public class Account {
     private static int idSetter = 0;
     private static boolean logined = false;
     private int id;
+    private Deck mainDeck;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
@@ -54,7 +55,10 @@ public class Account {
     public ArrayList<Card> getCards(){
         return cards;
     }
-    public ArrayList<Deck> getDecks(){ return decks}
+    public ArrayList<Deck> getDecks(){ return decks;}
+    public void setMainDeck(Deck deck){
+        this.mainDeck = deck;
+    }
 
     //this function returns 1 for entering battle,
     //2 for entering shop
@@ -168,6 +172,10 @@ public class Account {
 
     public static boolean getLeogined() {
         return logined;
+    }
+
+    public void deleteDeck (Deck deck){
+        decks.remove(deck);
     }
 
 }

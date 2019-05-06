@@ -39,8 +39,10 @@ public class Menu {
                 accountMenu = 1;
             }
             while (accountMenu == 1){
+                Account loggedInAccount;
                     command = scanner.nextLine();
                     command = command.toLowerCase();
+                    loggedInAccount = Account.getAccounts().get(Account.getIndexOfLogined());
                     if (command.equals("exit")){
                         accountMenu = 0;
                     }
@@ -55,15 +57,15 @@ public class Menu {
 //                            }
 //
 //                        }
-                        Item[] items = Account.getItems();
-                        Card[] cards = Account.getCards();
-                        for (Item item:items
+                        // items = loggedInAccount.getItems();
+                        //Card[] cards = Account.getCards();
+                        for (Item item:loggedInAccount.getItems()
                              ) {
                             if(commands[1].equals(item.getName())){
                                 System.out.println(item.getID());
                             }
                         }
-                        for (Card card:cards
+                        for (Card card:loggedInAccount.getCards()
                              ) {
                             if(commands[1].equals(card.getName())){
                                 System.out.println(card.getIdNumber());
@@ -77,11 +79,13 @@ public class Menu {
                     }
                     else if (command.matches("delete deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
-                        for (Deck deck: Account.getDecks();
+                        for (Deck deck: loggedInAccount.getDecks()
                              ) {
-                            
+                            if(deck.name.equals(commands[2])){
+                                loggedInAccount.deleteDeck(deck);
+                            }
                         }
-
+                        System.out.println("deck not found");
                     }
                     else if (command.matches("add [a-zA-Z]+ to deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
@@ -89,25 +93,63 @@ public class Menu {
                     }
                     else if (command.matches("remove [a-zA-Z]+ from deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
+                        for (Deck deck: loggedInAccount.getDecks()
+                        ) {
+                            if(deck.name.equals(commands[3])){
+                                for (:
+                                     ) {
 
+                                }
+                            }
+                        }
                     }
                     else if (command.matches("validate deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
-
+                        for (Deck deck: loggedInAccount.getDecks()
+                             ) {
+                            if(deck.name.equals(commands[2])){
+                                if (deck.isValid()){
+                                    System.out.println("Deck Is Valid");
+                                }
+                                else{
+                                    System.out.println("Deck Is Not Valid");
+                                }
+                            }
+                        }
+                        System.out.println("Deck Not Found");
                     }
                     else if (command.matches("select deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
+                        for (Deck deck: loggedInAccount.getDecks()
+                             ) {
+                            if (deck.name.equals(commands[2])){
+                                loggedInAccount.setMainDeck(deck);
+                            }
+                        }
 
                     }
                     else if (command.equals("show all decks")){}
                     else if (command.matches("show deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
-
+                        for (Deck deck:loggedInAccount.getDecks()
+                             ) {
+                            if(deck.name.equals(commands[2])){
+                                View.showDeck(deck);
+                            }
+                        }
                     }
                     else if (command.equals("help")){
-                        System.out.println("exit, show, search, create deck, delete deck, add to deck, remove from deck, validate deck, select deck, show all decks, show deck");
+                        System.out.println("create account [username] : makes an account");
+                        System.out.println("login [username] : logins your account");
+                        System.out.println("show leaderboard : shows the account by the number of wins");
+                        System.out.println("save : saves your info");
+                        System.out.println("logout : logout your account");
+                        //System.out.println("exit, show, search, create deck, delete deck, add to deck, remove from deck, validate deck, select deck, show all decks, show deck");
                     }
-                    else {}
+                    else {
+                        System.out.println("invalid command");
+                    }
+
 
 
 
