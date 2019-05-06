@@ -18,6 +18,7 @@ public class Account {
     private static int idSetter = 0;
     private static boolean logined = false;
     private int id;
+    private int nextCard;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
@@ -25,6 +26,9 @@ public class Account {
     private ArrayList<Card> graveYard = new ArrayList<>();
     private ArrayList<MatchHistory> matchHistories = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<Deck>();
+    private ArrayList<Minion> minionsInPlayYard = new ArrayList<>();
+    private ArrayList<Card> hand = new ArrayList<>();
+    private Deck mainDeck;
     private int daric;
     private int mana;
     private int maxMana;
@@ -158,7 +162,7 @@ public class Account {
         for (int i = 0; i < account.getItems().size(); i++) {
             Item item =  account.getItems().get(i);
             if (item.getID() == id){
-                return true
+                return true;
             }
         }
         return  false;
@@ -212,5 +216,31 @@ public class Account {
     public void setDaric(int daric){
         this.daric = daric;
     }
-
+    public int getMana(){
+        return mana;
+    }
+    public ArrayList<Minion> getMinionsInPlayYard(){
+        return minionsInPlayYard;
+    }
+    public void setGraveYard(ArrayList<Card> graveYard) {
+        this.graveYard = graveYard;
+    }
+    public void setMana(int mana){
+        this.mana = mana;
+    }
+    public void setMaxMana(int maxMana){
+        this.maxMana = maxMana;
+    }
+    public Deck getMainDeck(){
+        return mainDeck;
+    }
+    public int getNextCard(){
+        return nextCard;
+    }
+    public void setNextCard(int nextCard){
+        this.nextCard = nextCard;
+    }
+    public ArrayList<Card> getHand(){
+        return  hand;
+    }
 }

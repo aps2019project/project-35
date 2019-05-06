@@ -5,6 +5,7 @@ import Model.Card;
 import Model.Item;
 import View.View;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -61,8 +62,8 @@ public class Menu {
 //                            }
 //
 //                        }
-                        Item[] items = Account.getItems();
-                        Card[] cards = Account.getCards();
+                        ArrayList<Item> items = Account.getAccounts().get(Account.getIndexOfLogined()).getItems();
+                        ArrayList<Card> cards = Account.getAccounts().get(Account.getIndexOfLogined()).getCards();
                         for (Item item:items
                              ) {
                             if(commands[1].equals(item.getName())){
@@ -83,7 +84,7 @@ public class Menu {
                     }
                     else if (command.matches("delete deck [a-zA-Z]+")){
                         String[] commands = command.split(" ");
-                        for (Deck deck: Account.getDecks();
+                        for (Deck deck: Account.getAccounts().get(Account.getIndexOfLogined()).getDecks()
                              ) {
                             
                         }

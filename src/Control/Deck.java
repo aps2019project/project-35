@@ -14,22 +14,17 @@ public class Deck {
     private Item item;
     private Hero hero;
 
-
-
-
-
-
-
-
-
-
-
     public Deck(){
 
     }
-
-
-
-
+    public Hero getHero(){
+        return hero;
+    }
+    public ArrayList<Card> getCards(){
+        return cards;
+    }
+    public void setHero(Hero hero){
+        this.hero = hero;
+    }
     //public static void deleteDeck(Deck deck){}
 }
