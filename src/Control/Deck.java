@@ -1,8 +1,6 @@
 package Control;
 
-import Model.Card;
-import Model.Hero;
-import Model.Item;
+import Model.*;
 
 import java.util.ArrayList;
 
@@ -14,16 +12,6 @@ public class Deck {
     private ArrayList<Card> cards = new ArrayList<Card>();
     private Item item;
     private Hero hero;
-
-
-
-
-
-
-
-
-
-
 
     public Item getItem(){
         return item;
@@ -44,6 +32,9 @@ public class Deck {
      public void addCard (Card card){
 
         cards.add(card);
+     }
+     public void addMinion(Minion minion){
+
      }
      public void removeCard (String cardName){
          for (Card card:cards

@@ -1,10 +1,7 @@
 package Control;
 
 import Control.Match.Match;
-import Model.Card;
-import Model.Hero;
-import Model.Item;
-import Model.Minion;
+import Model.*;
 import View.View;
 
 import java.io.CharArrayReader;
@@ -23,6 +20,7 @@ public class Account {
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Minion> minions = new ArrayList<>();
+    private ArrayList<Spell> spells = new ArrayList<>();
     private ArrayList<Card> graveYard = new ArrayList<>();
     private ArrayList<MatchHistory> matchHistories = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -56,7 +54,12 @@ public class Account {
     public ArrayList<Card> getCards(){
         return cards;
     }
-    public ArrayList<Deck> getDecks(){ return decks;}
+    public ArrayList<Deck> getDecks(){
+        return decks;
+    }
+    public ArrayList<Spell> getSpells(){
+        return spells;
+    }
     public void setMainDeck(Deck deck){
         this.mainDeck = deck;
     }

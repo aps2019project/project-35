@@ -95,6 +95,7 @@ public class View {
                         " - MP  : " + card.getMp() + " Special Power : " + ((Minion) card).getSpecialPower()
                         + " - Sell cost : " + card.getPrice());
             }
+            i++;
         }
     }
 

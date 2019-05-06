@@ -1,10 +1,12 @@
 package Control;
 
 import Control.Match.Match;
-import Model.Card;
-import Model.Item;
+import Model.*;
 import View.View;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Menu {
@@ -13,186 +15,248 @@ public class Menu {
     public static void handleMenu(String command, Scanner scanner) {
         boolean inGame = true;
         while (inGame)
-        while (menu == 0) {
-            command = scanner.nextLine();
-            command = command.toLowerCase();
-            if (command.equals("help")) {
-                System.out.println("create account [username] : makes an account");
-                System.out.println("login [username] : logins your account");
-                System.out.println("show leaderboard : shows the account by the number of wins");
-                System.out.println("save : saves your info");
-                System.out.println("logout : logout your account");
-            } else if (command.matches("create account.*")) {
-                Account.createAccount(command, scanner);
-            } else if (command.matches("login .*")) {
-                Account.loginAccount(command, scanner, false);
-            } else if (command.equals("show leaderboard")) {
-                View.showLeaderboard();
-            } else if (command.equals("exit")) {
-                return;
+            while (menu == 0) {
+                command = scanner.nextLine();
+                command = command.toLowerCase();
+                if (command.equals("help")) {
+                    System.out.println("create account [username] : makes an account");
+                    System.out.println("login [username] : logins your account");
+                    System.out.println("show leaderboard : shows the account by the number of wins");
+                    System.out.println("save : saves your info");
+                    System.out.println("logout : logout your account");
+                } else if (command.matches("create account.*")) {
+                    Account.createAccount(command, scanner);
+                } else if (command.matches("login .*")) {
+                    Account.loginAccount(command, scanner, false);
+                } else if (command.equals("show leaderboard")) {
+                    View.showLeaderboard();
+                } else if (command.equals("exit")) {
+                    return;
+                }
             }
-        }
-        while (menu ==  1){
+        while (menu == 1) {
             int accountMenu = 0;
             command = scanner.nextLine();
-            command =  command.toLowerCase();
-            if (command.equals("enter collection")){
+            command = command.toLowerCase();
+            if (command.equals("enter collection")) {
                 accountMenu = 1;
-            } else if (command.equals("enter shop")){
+            } else if (command.equals("enter shop")) {
                 accountMenu = 2;
-            } else if (command.equals("enter battle")){
+            } else if (command.equals("enter battle")) {
                 Match.createMatch(command, scanner);
                 accountMenu = 3;
             }
-            while (accountMenu == 1){
+            while (accountMenu == 1) {
                 Account loggedInAccount;
-                    command = scanner.nextLine();
-                    command = command.toLowerCase();
-                    loggedInAccount = Account.getAccounts().get(Account.getIndexOfLogined());
-                    if (command.equals("exit")){
-                        accountMenu = 0;
-                    }
-                    else if (command.equals("show")){
-                        View.showCollection();
-                    }
-                    else if (command.matches("search [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
+                command = scanner.nextLine();
+                command = command.toLowerCase();
+                loggedInAccount = Account.getAccounts().get(Account.getIndexOfLogined());
+                if (command.equals("exit")) {
+                    accountMenu = 0;
+                } else if (command.equals("show")) {
+                    View.showCollection();
+                } else if (command.matches("search [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
 //                        for(int i=1;i<Account.getItems.size();i++){
 //                            if(commands[1].equals(Collection.collectionCards.get(i))){
 //                                System.out.println(Collection.collectionCards.get(i).getIdNumber());
 //                            }
 //
 //                        }
-                        // items = loggedInAccount.getItems();
-                        //Card[] cards = Account.getCards();
-                        for (Item item:loggedInAccount.getItems()
-                             ) {
-                            if(commands[1].equals(item.getName())){
-                                System.out.println(item.getID());
-                            }
-                        }
-                        for (Card card:loggedInAccount.getCards()
-                             ) {
-                            if(commands[1].equals(card.getName())){
-                                System.out.println(card.getIdNumber());
-                            }
+                    // items = loggedInAccount.getItems();
+                    //Card[] cards = Account.getCards();
+                    for (Item item : loggedInAccount.getItems()
+                    ) {
+                        if (commands[1].equals(item.getName())) {
+                            System.out.println(item.getID());
                         }
                     }
-                    else if (command.equals("save")){}
-                    else if (command.matches("create deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-
-                    }
-                    else if (command.matches("delete deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-                        for (Deck deck: loggedInAccount.getDecks()
-                             ) {
-                            if(deck.name.equals(commands[2])){
-                                loggedInAccount.deleteDeck(deck);
-                            }
+                    for (Card card : loggedInAccount.getCards()
+                    ) {
+                        if (commands[1].equals(card.getName())) {
+                            System.out.println(card.getIdNumber());
                         }
-                        System.out.println("deck not found");
                     }
-                    else if (command.matches("add [a-zA-Z]+ to deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
+                } else if (command.equals("save")) {
+                    YaGson yaGson = new YaGsonBuilder().create();
+                    String string = yaGson.toJson(yaGson, YaGson.class);
+                    String path = System.getProperty("user.dir") + "";
+                    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
+                        bufferedWriter.write(string);
+
+                    } catch (IOException e) {
 
                     }
-                    else if (command.matches("remove [a-zA-Z]+ from deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-                        for (Deck deck: loggedInAccount.getDecks()
-                        ) {
-                            if(deck.name.equals(commands[3])){
-                                for (:
-                                     ) {
+                    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+                        String line = bufferedReader.readLine();
+                        while (line != null) {
+                            YaGson yaGson1 = yaGson.fromJson(line, YaGson.class);
 
+                        }
+                    } catch (IOException e) {
+
+                    }
+                } else if (command.matches("create deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    loggedInAccount.getDecks().add(new Deck(commands[2]));
+
+                } else if (command.matches("delete deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck : loggedInAccount.getDecks()
+                    ) {
+                        if (deck.name.equals(commands[2])) {
+                            loggedInAccount.deleteDeck(deck);
+                        }
+                    }
+                    System.out.println("deck not found");
+                } else if (command.matches("add [a-zA-Z]+ to deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck:loggedInAccount.getDecks()
+                         ){
+                        if(deck.name.equals(commands[3])) {
+
+
+                            for (Item item:loggedInAccount.getItems()
+                                 ) {
+                                if(item.getName().equals(commands[1])){
+                                    if(deck.getCards().size() < 20){
+                                        deck.setItem(item);
+                                    }
                                 }
                             }
-                        }
-                    }
-                    else if (command.matches("validate deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-                        for (Deck deck: loggedInAccount.getDecks()
-                             ) {
-                            if(deck.name.equals(commands[2])){
-                                if (deck.isValid()){
-                                    System.out.println("Deck Is Valid");
-                                }
-                                else{
-                                    System.out.println("Deck Is Not Valid");
+
+
+                            for (Spell spell:loggedInAccount.getSpells()
+                                 ) {
+                                if(spell.getName().equals(commands[1])){
+                                    deck.addCard(spell);
                                 }
                             }
+
+
+                            for (Minion minion: loggedInAccount.getMinions()
+                                 ) {
+                                if (minion.getName().equals(commands[1])){
+                                    for (Card card:deck.getCards()
+                                         ) {
+                                        if(card.getName().equals(minion.getName())){
+                                            System.out.println("Card Already Exists In Deck");
+                                        }
+                                        else{
+                                            if(deck.getCards().size() < 20){
+                                                deck.addCard(minion);                                        }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+
+
+                            for (Hero hero : loggedInAccount.getHeroes()
+                            ) {
+                                if (hero.getName().equals(commands[1])) {
+                                    if (deck.getHero() != null){
+                                        System.out.println("A Hero Already Exists In Deck");
+                                    }
+                                    deck.setHero(hero);
+                                }
+                            }
+
+
                         }
-                        System.out.println("Deck Not Found");
                     }
-                    else if (command.matches("select deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-                        for (Deck deck: loggedInAccount.getDecks()
-                             ) {
-                            if (deck.name.equals(commands[2])){
-                                loggedInAccount.setMainDeck(deck);
+
+                } else if (command.matches("remove [a-zA-Z]+ from deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck : loggedInAccount.getDecks()
+                    ) {
+                        if (deck.name.equals(commands[3])) {
+
+
+                            for (Card card:deck.getCards()
+                                 ) {
+                                if (card.getName().equals(commands[1])){
+                                    deck.removeCard(card.getName());
+                                }
+                            }
+
+
+
+
+                        }
+                    }
+                } else if (command.matches("validate deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck : loggedInAccount.getDecks()
+                    ) {
+                        if (deck.name.equals(commands[2])) {
+                            if (deck.isValid()) {
+                                System.out.println("Deck Is Valid");
+                            } else {
+                                System.out.println("Deck Is Not Valid");
                             }
                         }
-
                     }
-                    else if (command.equals("show all decks")){}
-                    else if (command.matches("show deck [a-zA-Z]+")){
-                        String[] commands = command.split(" ");
-                        for (Deck deck:loggedInAccount.getDecks()
-                             ) {
-                            if(deck.name.equals(commands[2])){
-                                View.showDeck(deck);
-                            }
+                    System.out.println("Deck Not Found");
+                } else if (command.matches("select deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck : loggedInAccount.getDecks()
+                    ) {
+                        if (deck.name.equals(commands[2])) {
+                            loggedInAccount.setMainDeck(deck);
                         }
                     }
-                    else if (command.equals("help")){
-                        System.out.println("create account [username] : makes an account");
-                        System.out.println("login [username] : logins your account");
-                        System.out.println("show leaderboard : shows the account by the number of wins");
-                        System.out.println("save : saves your info");
-                        System.out.println("logout : logout your account");
-                        //System.out.println("exit, show, search, create deck, delete deck, add to deck, remove from deck, validate deck, select deck, show all decks, show deck");
+
+                } else if (command.equals("show all decks")) {
+                } else if (command.matches("show deck [a-zA-Z]+")) {
+                    String[] commands = command.split(" ");
+                    for (Deck deck : loggedInAccount.getDecks()
+                    ) {
+                        if (deck.name.equals(commands[2])) {
+                            View.showDeck(deck);
+                        }
                     }
-                    else {
-                        System.out.println("invalid command");
-                    }
+                } else if (command.equals("help")) {
+                    System.out.println("create account [username] : makes an account");
+                    System.out.println("login [username] : logins your account");
+                    System.out.println("show leaderboard : shows the account by the number of wins");
+                    System.out.println("save : saves your info");
+                    System.out.println("logout : logout your account");
+                    //System.out.println("exit, show, search, create deck, delete deck, add to deck, remove from deck, validate deck, select deck, show all decks, show deck");
+                } else {
+                    System.out.println("invalid command");
+                }
 
 
-
-
-
-
-
-
-
-
-
-            } while (accountMenu == 2){
-                command =  scanner.nextLine();
+            } while (accountMenu == 2) {
+                command = scanner.nextLine();
                 command = command.toLowerCase();
-                if  (command.equals("exit")){
+                if (command.equals("exit")) {
                     accountMenu = 0;
-                } else if (command.equals("show collection")){
+                } else if (command.equals("show collection")) {
                     View.showCollection();
-                } else if (command.matches("search collection .*")){
+                } else if (command.matches("search collection .*")) {
                     Account.searchCollection(command);
-                } else if (command.matches("search .*")){
+                } else if (command.matches("search .*")) {
                     int id = Shop.search(command);
-                    if (id == -1){
+                    if (id == -1) {
                         System.out.println("there isn't any card with this name in shop !");
                     } else {
                         System.out.println(id);
                     }
-                } else if (command.matches("buy .*")){
+                } else if (command.matches("buy .*")) {
                     int id = Shop.search(command);
-                    if (id == -1){
+                    if (id == -1) {
                         System.out.println("there isn't any card with this name is shop !");
-                    }else {
+                    } else {
                         Shop.buy(command);
                     }
-                } else if (command.matches("sell \\d+")){
+                } else if (command.matches("sell \\d+")) {
                     int id = Integer.parseInt(command.substring(5));
                     Shop.sell(id);
-                } else  if (command.equals("help")){
+                } else if (command.equals("help")) {
                     System.out.println("exit : back to account menu");
                     System.out.println("show collection : view your collection");
                     System.out.println("search [item name | card name] : searches in shop");
@@ -201,28 +265,29 @@ public class Menu {
                     System.out.println("sell [item id | card id] : sells !");
                     System.out.println("show : shows the whole shop !");
                 }
-            } while (accountMenu == 3){
+            }
+            while (accountMenu == 3) {
                 command = scanner.nextLine();
                 command = command.toLowerCase();
-                if (command.equals("exit")){
+                if (command.equals("exit")) {
                     accountMenu = 0;
                 }
-                if (Match.getMode() == 1){
+                if (Match.getMode() == 1) {
 
-                }
-                else if (Match.getMode() == 2){
+                } else if (Match.getMode() == 2) {
 
-                }
-                else  if (Match.getMode() == 3){
+                } else if (Match.getMode() == 3) {
 
                 }
             }
         }
     }
-    public static void increaseMenu(){
+
+    public static void increaseMenu() {
         menu++;
     }
-    public static void decreaseMenu(){
+
+    public static void decreaseMenu() {
         menu--;
     }
 }
