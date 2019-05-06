@@ -162,7 +162,7 @@ public class Account {
         for (int i = 0; i < account.getItems().size(); i++) {
             Item item =  account.getItems().get(i);
             if (item.getID() == id){
-                return true
+                return true;
             }
         }
         return  false;
