@@ -8,8 +8,9 @@ public class Hero extends Soldier {
     private ArrayList<Spell> possitiveBuffs = new ArrayList<>();
     private ArrayList<Spell> negativeBuffs = new ArrayList<>();
     private int coolDown;
-    public Hero(int hp, int ap, int mp, int coolDown, int price, String name, String attackType, int attackRange){
-        super(hp, ap, mp, price, name, attackType, attackRange);
+    public Hero(int hp, int ap, int mp, int coolDown, int price, String name, String attackType, int attackRange
+    , int idNumber){
+        super(hp, ap, mp, price, name, attackType, attackRange, idNumber);
         this.coolDown = coolDown;
     }
     public void attack(Soldier myCard, int opponentCardID, Match match) {

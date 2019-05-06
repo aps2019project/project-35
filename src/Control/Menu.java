@@ -1,5 +1,6 @@
 package Control;
 
+import Control.Match.Match;
 import Model.Card;
 import Model.Item;
 import View.View;
@@ -37,6 +38,11 @@ public class Menu {
             command =  command.toLowerCase();
             if (command.equals("enter collection")){
                 accountMenu = 1;
+            } else if (command.equals("enter shop")){
+                accountMenu = 2;
+            } else if (command.equals("enter battle")){
+                Match.createMatch(command, scanner);
+                accountMenu = 3;
             }
             while (accountMenu == 1){
                 Account loggedInAccount;
@@ -160,6 +166,56 @@ public class Menu {
 
 
 
+            } while (accountMenu == 2){
+                command =  scanner.nextLine();
+                command = command.toLowerCase();
+                if  (command.equals("exit")){
+                    accountMenu = 0;
+                } else if (command.equals("show collection")){
+                    View.showCollection();
+                } else if (command.matches("search collection .*")){
+                    Account.searchCollection(command);
+                } else if (command.matches("search .*")){
+                    int id = Shop.search(command);
+                    if (id == -1){
+                        System.out.println("there isn't any card with this name in shop !");
+                    } else {
+                        System.out.println(id);
+                    }
+                } else if (command.matches("buy .*")){
+                    int id = Shop.search(command);
+                    if (id == -1){
+                        System.out.println("there isn't any card with this name is shop !");
+                    }else {
+                        Shop.buy(command);
+                    }
+                } else if (command.matches("sell \\d+")){
+                    int id = Integer.parseInt(command.substring(5));
+                    Shop.sell(id);
+                } else  if (command.equals("help")){
+                    System.out.println("exit : back to account menu");
+                    System.out.println("show collection : view your collection");
+                    System.out.println("search [item name | card name] : searches in shop");
+                    System.out.println("search collection [item name | card name] : searches in your collection");
+                    System.out.println("buy [item name | card name] : buys !");
+                    System.out.println("sell [item id | card id] : sells !");
+                    System.out.println("show : shows the whole shop !");
+                }
+            } while (accountMenu == 3){
+                command = scanner.nextLine();
+                command = command.toLowerCase();
+                if (command.equals("exit")){
+                    accountMenu = 0;
+                }
+                if (Match.getMode() == 1){
+
+                }
+                else if (Match.getMode() == 2){
+
+                }
+                else  if (Match.getMode() == 3){
+
+                }
             }
         }
     }

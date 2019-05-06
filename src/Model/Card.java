@@ -8,11 +8,12 @@ public abstract class Card {
     protected String type, desc , id, name;
     Account account;
     Square square;
-    public Card(int mp, int price, String name, int attackRange){
+    public Card(int mp, int price, String name, int attackRange, int idNumber){
         this.mp = mp;
         this.price = price;
         this.name = name;
         this.attackRange = attackRange;
+        this.idNumber = idNumber;
     }
     public int getIdNumber(){
         return idNumber;
