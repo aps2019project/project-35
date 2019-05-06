@@ -1,7 +1,6 @@
 package View;
 
 import Control.Account;
-import Control.Match.Match;
 import Model.*;
 
 import java.util.ArrayList;
@@ -61,44 +60,6 @@ View {
                 + card.getMp() + "Descrption : " + ((Spell) card).getDescription() +
                         " - Sell cost : " + card.getPrice());
             }
-        }
-    }
-    public static void showGame(){
-        Match match = Match.mode1;
-        if (Match.getMode() == 2){
-            match = Match.mode2;
-        }
-        else if (Match.getMode() == 3){
-            match = Match.mode3;
-        }
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (!match.getSquares()[i][j].getIsFull()){
-                    System.out.print("-\t\t");
-                }
-                else{
-                    System.out.print(match.getSquares()[i][j].getCard().getName() + "\t");
-                }
-            }
-            System.out.print("\n");
-        }
-    }
-    public static void showGameInfo(){
-        Match match = Match.mode1;
-        if (Match.getMode() == 2){
-            match = Match.mode2;
-        }
-        else if (Match.getMode() == 3){
-            match = Match.mode3;
-        }
-        System.out.println(match.getFirstAccount().getUsername() + " Mana : " + match.getFirstAccount().getMana());
-        System.out.println(match.getSecondAccount().getUsername() + " Mana : " + match.getSecondAccount().getMana());
-    }
-    public static void showMinionsInPlayYard(Account account){
-        for (int i = 0; i < account.getMinionsInPlayYard().size(); i++) {
-            Minion minion = account.getMinionsInPlayYard().get(i);
-            System.out.printf("%d : %s, health : %d, location : [(%d,%d)], power : %d", minion.getIdNumber()
-            , minion.getName(), minion.getHp(), minion.getX(), minion.getY(), minion.getAp());
         }
     }
 }
