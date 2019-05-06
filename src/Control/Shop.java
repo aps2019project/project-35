@@ -9,21 +9,21 @@ import java.net.CacheRequest;
 import java.util.ArrayList;
 
 public class Shop {
-    public static ArrayList<Item> items;
-    public static ArrayList<Hero> heroes;
-    public static ArrayList<Minion> minions;
+    public static ArrayList<Item> items = new ArrayList<>();
+    public static ArrayList<Hero> heroes = new ArrayList<>();
+    public static ArrayList<Minion> minions = new ArrayList<>();
 
     public static void createShop() {
-        heroes.add(new Hero(50, 4, 1, 2, 8000, "White Devil", "melee", -1, 1001));
-        heroes.add(new Hero(50, 4, 5, 8, 9000, "Phoenix", "melee", -1, 1002));
-        heroes.add(new Hero(50, 4, 0, 1, 8000, "SevenHeaded Dragon", "melee", -1, 1003));
-        heroes.add(new Hero(50, 4, 1, 2, 8000, "Rakhsh", "melee", -1, 1004));
-        heroes.add(new Hero(50, 2, -1, -1, 10000, "Zahaak", "melee", -1, 1005));
-        heroes.add(new Hero(50, 4, 1, 3, 8000, "Kaveh", "melee", -1, 1006));
-        heroes.add(new Hero(30, 2, 2, 2, 10000, "Arash", "ranged", 6, 1007));
-        heroes.add(new Hero(40, 3, 1, 2, 11000, "Legend", "ranged", 3, 1008));
-        heroes.add(new Hero(35, 3, -1, -1, 12000, "Esfandiar", "hybrid", 3, 1009));
-        heroes.add(new Hero(55, 7, -1, -1, 8000, "Rostam", "hybrid", 4, 1010));
+        heroes.add(new Hero(50, 4, 1, 2, 8000, "white devil", "melee", -1, 1001));
+        heroes.add(new Hero(50, 4, 5, 8, 9000, "phoenix", "melee", -1, 1002));
+        heroes.add(new Hero(50, 4, 0, 1, 8000, "sevenHeaded dragon", "melee", -1, 1003));
+        heroes.add(new Hero(50, 4, 1, 2, 8000, "rakhsh", "melee", -1, 1004));
+        heroes.add(new Hero(50, 2, -1, -1, 10000, "zahaak", "melee", -1, 1005));
+        heroes.add(new Hero(50, 4, 1, 3, 8000, "kaveh", "melee", -1, 1006));
+        heroes.add(new Hero(30, 2, 2, 2, 10000, "arash", "ranged", 6, 1007));
+        heroes.add(new Hero(40, 3, 1, 2, 11000, "legend", "ranged", 3, 1008));
+        heroes.add(new Hero(35, 3, -1, -1, 12000, "esfandiar", "hybrid", 3, 1009));
+        heroes.add(new Hero(55, 7, -1, -1, 8000, "rostam", "hybrid", 4, 1010));
 
         minions.add(new Minion(6, 4, 2, 300, "Persian Archer", "ranged", 7, false, false, 2001));
         minions.add(new Minion(6, 4, 2, 400, "Persian Swordsman", "melee", -1, true, false, 2002));
@@ -68,7 +68,6 @@ public class Shop {
     }
 
     public static int search(String command) {
-        command = command.substring(7);
         for (int i = 0; i < heroes.size(); i++) {
             Hero hero = heroes.get(i);
             if (hero.getName().equals(command)) {
@@ -102,6 +101,8 @@ public class Shop {
                 account.getHeroes().add(hero);
                 account.getCards().add(hero);
                 account.setDaric(account.getDaric() - hero.getPrice());
+                account.getMainDeck().setHero(hero);
+                System.out.println("buy successful");
             }
         }
         for (int i = 0; i < minions.size(); i++) {
@@ -114,6 +115,7 @@ public class Shop {
                 account.getMinions().add(minion);
                 account.getCards().add(minion);
                 account.setDaric(account.getDaric() - minion.getPrice());
+                System.out.println("buy successful");
             }
         }
         for (int i = 0; i < items.size(); i++) {
@@ -129,6 +131,7 @@ public class Shop {
                 }
                 account.getItems().add(item);
                 account.setDaric(account.getDaric() - item.getPrice());
+                System.out.println("buy successful");
             }
         }
     }

@@ -30,4 +30,10 @@ public abstract class Card {
     public  int getMp(){
         return mp;
     }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
 }

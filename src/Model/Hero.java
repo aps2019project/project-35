@@ -14,7 +14,7 @@ public class Hero extends Soldier {
         this.coolDown = coolDown;
     }
     public void attack(Soldier myCard, int opponentCardID, Match match) {
-        if (attacked) {
+        if (isAttacked) {
             System.out.println("Error : you can't attack until next turn");
             return;
         }

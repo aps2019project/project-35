@@ -8,7 +8,7 @@ public abstract class Soldier extends Card {
         this.attackType = attackType;
     }
     protected boolean isMoved;
-    protected boolean attacked;
+    protected boolean isAttacked;
     protected boolean activeCounterAttack;
     protected boolean isStunned;
     protected int hp;
@@ -45,5 +45,17 @@ public abstract class Soldier extends Card {
     }
     public String getAttackType(){
         return attackType;
+    }
+    public void setIsMoved(boolean isMoved){
+        this.isMoved = isMoved;
+    }
+    public boolean getIsMoved(){
+        return isMoved;
+    }
+    public boolean isAttacked(){
+        return isAttacked();
+    }
+    public void setIsAttacked(boolean isAttacked){
+        this.isAttacked = isAttacked;
     }
 }

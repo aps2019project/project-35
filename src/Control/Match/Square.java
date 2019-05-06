@@ -9,6 +9,11 @@ public class Square {
     private boolean isFull;
     private Card card;
     private ArrayList<Spell> spells;
+    public Square(){
+        isFull = false;
+        spells = new ArrayList<>();
+        card = null;
+    }
     public boolean getIsFull(){
         return isFull;
     }
@@ -23,5 +28,10 @@ public class Square {
     }
     public void setCard(Card card){
         this.card = card;
+    }
+
+    public void putCard(Card card){
+        this.setCard(card);
+        this.setFull(true);
     }
 }

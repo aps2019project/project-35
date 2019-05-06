@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static int menu = 0;
     public static void main(String[] args) {
+        Shop.createShop();
         Mode1 mode1;
         Mode2 moode2;
         Mode3 mode3;

@@ -8,6 +8,7 @@ import Model.Minion;
 import View.View;
 
 import java.io.CharArrayReader;
+import java.lang.management.MonitorInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,13 +19,17 @@ public class Account {
     private static int idSetter = 0;
     private static boolean logined = false;
     private int id;
+    private int nextCard;
     private ArrayList<Hero> heroes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Minion> minions = new ArrayList<>();
     private ArrayList<Card> graveYard = new ArrayList<>();
+    private ArrayList<Minion> minionsInPlayYard = new ArrayList<>();
     private ArrayList<MatchHistory> matchHistories = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<Deck>();
+    private ArrayList<Card> hand = new ArrayList<>();
+    private Deck mainDeck;
     private int daric;
     private int mana;
     private int maxMana;
@@ -42,6 +47,7 @@ public class Account {
         this.username = username;
         this.password = password;
         id = idSetter;
+        mainDeck = new Deck();
     }
     public ArrayList<Hero> getHeroes(){
         return heroes;
@@ -99,13 +105,13 @@ public class Account {
     }
 
     public static boolean loginAccount(String command, Scanner scanner, boolean first) {
-        if (command.trim().equals("login")) {
+        if (command.trim().equals("")) {
             System.out.println("Error : please enter a username to login !");
             return false;
         }
         boolean accountExists = false;
         for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).username.equals(command.substring(6))) {
+            if (accounts.get(i).username.equals(command)) {
                 System.out.println("Please enter your password :");
                 String password = scanner.nextLine();
                 if (!password.equals(accounts.get(i).password)) {
@@ -158,7 +164,7 @@ public class Account {
         for (int i = 0; i < account.getItems().size(); i++) {
             Item item =  account.getItems().get(i);
             if (item.getID() == id){
-                return true
+                return true;
             }
         }
         return  false;
@@ -211,6 +217,36 @@ public class Account {
     }
     public void setDaric(int daric){
         this.daric = daric;
+    }
+    public void setGraveYard(ArrayList<Card> graveYard){
+        this.graveYard = graveYard;
+    }
+    public void setMana(int mana){
+        this.mana = mana;
+    }
+    public int getMana(){
+        return mana;
+    }
+    public void setMaxMana(int maxMana){
+        this.maxMana = maxMana;
+    }
+    public int getMaxMana(){
+        return maxMana;
+    }
+    public Deck getMainDeck() {
+        return mainDeck;
+    }
+    public  ArrayList<Minion> getMinionsInPlayYard(){
+        return minionsInPlayYard;
+    }
+    public int getNextCard(){
+        return nextCard;
+    }
+    public void setNextCard(int nextCard){
+        this.nextCard = nextCard;
+    }
+    public ArrayList<Card> getHand(){
+        return hand;
     }
 
 }
