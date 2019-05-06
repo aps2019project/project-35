@@ -59,6 +59,7 @@ View {
                 System.out.println(i + 1 + " : Type : Spell - Name : " + card.getName() + "MP : "
                 + card.getMp() + "Descrption : " + ((Spell) card).getDescription() +
                         " - Sell cost : " + card.getPrice());
+
             }
         }
     }
